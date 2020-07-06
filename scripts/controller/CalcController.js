@@ -1,5 +1,6 @@
 class CalcController{
     constructor(){
+        this._locale = 'pt-BR';
         this._displayCalcEl =  document.querySelector('#display');
         this._dateEl = document.querySelector('#data');
         this._timeEl = document.querySelector('#hora');
@@ -9,7 +10,20 @@ class CalcController{
     }
 
     initialize(){
-       
+        this.setdisplayDateTime();
+
+       setInterval(()=>{
+            this.setdisplayDateTime();
+        }, 1000);
+    }
+
+    setdisplayDateTime(){
+        this.displayDate = this.currentDate.toLocaleDateString(this._locale, {
+            day:"2-digit",
+            month:"long",
+            year:"numeric"
+        });
+        this.displayTime = this.currentDate.toLocaleTimeString(this._locale);
     }
 
     get displayTime(){
